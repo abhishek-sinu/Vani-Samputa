@@ -5,6 +5,7 @@ import './AudioLibrary.css';
 
 function AudioLibrary() {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const languages = [
     { name: 'Odia', icon: '🕉️', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/odia-card.jpg' },
@@ -13,7 +14,10 @@ function AudioLibrary() {
   ];
 
   const filteredPlaylists = selectedLanguage
-    ? audioData.filter(playlist => playlist.language === selectedLanguage)
+    ? audioData.filter(playlist => 
+        playlist.language === selectedLanguage &&
+        playlist.playlistName.toLowerCase().includes(searchTerm.toLowerCase())
+      )
     : [];
 
   const getPlaylistCount = (language) => {
@@ -55,6 +59,28 @@ function AudioLibrary() {
               ← Back to Languages
             </button>
             <h2>{selectedLanguage} Audio Lectures</h2>
+          </div>
+
+          <div className="search-container">
+            <div className="search-bar">
+              <span className="search-icon">🔍</span>
+              <input
+                type="text"
+                placeholder="Search playlists by name..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
+              />
+              {searchTerm && (
+                <button
+                  className="clear-search"
+                  onClick={() => setSearchTerm('')}
+                  aria-label="Clear search"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
           </div>
 
           {filteredPlaylists.length > 0 ? (

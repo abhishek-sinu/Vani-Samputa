@@ -6,13 +6,20 @@ function Home() {
   return (
     <div className="home-container">
       <div className="hero-section">
-        <h1>Welcome to Vāṇī Saṃpuṭa</h1>
-        <p className="hero-subtitle">
-          Access spiritual lectures with transcriptions and organized video playlists
-        </p>
-        <p className="hero-author">
-          Lectures given by HH Haladhara Svāmī Mahārāja
-        </p>
+        <div className="hero-content">
+          <div className="guru-photo">
+            <img src="/icons/hindi-card.jpg" alt="HH Haladhara Svāmī Mahārāja" />
+          </div>
+          <div className="hero-text">
+            <h1>Welcome to Vāṇī Saṃpuṭa</h1>
+            <p className="hero-subtitle">
+              Access spiritual lectures with transcriptions and organized video playlists
+            </p>
+            <p className="hero-author">
+              Lectures given by HH Haladhara Svāmī Mahārāja
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="features-grid">

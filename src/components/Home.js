@@ -19,6 +19,9 @@ function Home() {
               Lectures given by HH Haladhara Svāmī Mahārāja
             </p>
           </div>
+          <div className="radha-madhava-image">
+            <img src="/RadhaMadhav.png" alt="Radha Madhava" />
+          </div>
         </div>
       </div>
 
@@ -62,8 +65,8 @@ function Home() {
         <h2>About This Library</h2>
         <p>
           This platform provides access to spiritual knowledge through audio and video formats. 
-          Our collection includes lectures on Bhagavad Gita, Srimad Bhagavatam, morning walk 
-          conversations, and special festival lectures.
+          Our collection includes lectures on Bhagavad Gita, Srimad Bhagavatam, conversations, 
+          and special festival lectures.
         </p>
         <div className="stats-container">
           <div className="stat-item">

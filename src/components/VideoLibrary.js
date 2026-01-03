@@ -29,7 +29,8 @@ function VideoLibrary() {
       <div className="library-header">
         {selectedLanguage && (
           <button onClick={() => setSelectedLanguage(null)} className="back-to-languages">
-            ← Back to Languages
+            <span className="back-arrow">←</span>
+            <span className="back-text">Back to Languages</span>
           </button>
         )}
         <h1>{selectedLanguage ? `${selectedLanguage} Videos` : 'Video Playlists'}</h1>

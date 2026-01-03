@@ -39,6 +39,9 @@
   cursor: pointer;
   transition: all 0.3s;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
 .library-header .back-to-languages:hover {
@@ -401,6 +404,26 @@
 
   .selected-language-header h2 {
     font-size: 1.5rem;
+  }
+
+  .library-header .back-to-languages {
+    left: 0.5rem;
+    top: 0.5rem;
+    padding: 0.4rem;
+    min-width: 36px;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid #8b6f47;
+    justify-content: center;
+  }
+
+  .library-header .back-to-languages .back-text {
+    display: none;
+  }
+
+  .library-header .back-to-languages .back-arrow {
+    font-size: 1.1rem;
   }
 
   .back-to-languages {

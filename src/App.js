@@ -13,7 +13,12 @@ function App() {
       <div className="App">
         <header className="app-header">
           <div className="header-content">
-            <h1>Vāṇī Saṃpuṭa</h1>
+            <div className="header-branding">
+              <div className="logo-circle">
+                <img src="/logo.png" alt="Vāṇī Saṃpuṭa Logo" className="site-logo" />
+              </div>
+              <h1>Vāṇī Saṃpuṭa</h1>
+            </div>
             <nav className="main-nav">
               <Link to="/">Home</Link>
               <Link to="/audio">Audio Lectures</Link>

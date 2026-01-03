@@ -10,6 +10,9 @@ function Home() {
         <p className="hero-subtitle">
           Access spiritual lectures with transcriptions and organized video playlists
         </p>
+        <p className="hero-author">
+          Lectures given by HH Haladhara Svāmī Mahārāja
+        </p>
       </div>
 
       <div className="features-grid">
@@ -26,7 +29,7 @@ function Home() {
 
         <Link to="/video" className="feature-card-link">
           <div className="feature-card">
-            <div className="feature-icon">📹</div>
+            <div className="feature-icon">▶️</div>
             <h2>Video Playlists</h2>
             <p>
               Watch organized video playlists on various topics. All videos are linked 

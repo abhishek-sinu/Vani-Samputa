@@ -1,84 +1,49 @@
 export const audioData = [
   {
     id: 1,
-    title: "Introduction to Bhagavad Gita - Chapter 1",
-    category: "Bhagavad Gita Lectures",
-    date: "2024-01-15",
-    duration: "45:30",
-    audioUrl: "/audio/bg-chapter-1.mp3",
-    hasTranscription: true,
-    transcription: `Welcome everyone to this lecture on Bhagavad Gita Chapter 1.
-
-Today we will discuss the setting of the great conversation between Krishna and Arjuna on the battlefield of Kurukshetra.
-
-Arjuna, seeing his relatives, teachers, and friends on both sides of the battlefield, becomes overwhelmed with grief and confusion. He questions the purpose of fighting this war.
-
-This chapter sets the stage for Krishna's divine wisdom that follows in the subsequent chapters.
-
-The main themes covered are:
-- The dilemma of Arjuna
-- The ethical conflict of duty versus emotion
-- The beginning of spiritual inquiry
-
-Krishna's teachings help Arjuna understand his duty as a warrior and the eternal nature of the soul...`
-  },
-  {
-    id: 2,
-    title: "Understanding the Soul - Chapter 2",
-    category: "Bhagavad Gita Lectures",
-    date: "2024-01-22",
-    duration: "52:15",
-    audioUrl: "/audio/bg-chapter-2.mp3",
-    hasTranscription: true,
-    transcription: `In this profound chapter, Krishna begins His instruction to Arjuna about the eternal nature of the soul.
-
-The soul is eternal, indestructible, and beyond the material body. Just as a person changes worn-out garments, the soul changes bodies.
-
-Key points discussed:
-- The soul never dies
-- Birth and death affect only the body
-- The soul is beyond material qualities
-- Performing one's duty without attachment
-
-Krishna explains that we should not grieve for the body, as it is temporary, while the soul continues its journey...`
-  },
-  {
-    id: 3,
-    title: "Morning Walk Conversation - Spiritual Practice",
-    category: "Morning Walks",
-    date: "2024-02-01",
-    duration: "28:45",
-    audioUrl: "/audio/morning-walk-1.mp3",
-    hasTranscription: true,
-    transcription: `This morning walk discusses the importance of regular spiritual practice in daily life.
-
-The key to spiritual advancement is consistency and sincerity in practice.
-
-Topics covered:
-- Daily meditation routine
-- Importance of early morning hours
-- Chanting and its benefits
-- Living a balanced life
-
-Remember, spiritual life is not separate from daily activities. It should be integrated into everything we do...`
-  },
-  {
-    id: 4,
-    title: "Srimad Bhagavatam - Canto 1, Chapter 1",
-    category: "Srimad Bhagavatam Lectures",
-    date: "2024-02-10",
-    duration: "1:15:20",
-    audioUrl: "/audio/sb-1-1.mp3",
-    hasTranscription: false
-  },
-  {
-    id: 5,
-    title: "Nectar of Devotion - Introduction to Bhakti",
-    category: "Nectar of Devotion",
-    date: "2024-02-15",
-    duration: "40:25",
-    audioUrl: "/audio/nod-intro.mp3",
-    hasTranscription: false
+    playlistName: "Sriman Mahaprabhu & Prema Bhakti",
+    category: "Chaitanya Charitamrita",
+    description: "lecture series on Sriman Mahaprabhu & Prema Bhakti",
+    language: "Hindi",
+    icon: "/icons/Sriman_Mahaprabhu_&_Prema_Bhakti_Day.jpg",
+    audios: [
+      {
+        id: 101,
+        title: "Sriman Mahaprabhu & Prema Bhakti Day 1",
+        audioUrl: "/audio/Sriman_Mahaprabhu_&_Prema_Bhakti_Day_1.mp3",
+        duration: "N/A",
+        date: "2024-01-02",
+        hasTranscription: true,
+        transcription: `coming soon...`
+      },
+      {
+        id: 102,
+        title: "Sriman Mahaprabhu & Prema Bhakti Day 2",
+        audioUrl: "/audio/Sriman_Mahaprabhu_&_Prema_Bhakti_Day_2.mp3",
+        duration: "45:30",
+        date: "2024-01-15",
+        hasTranscription: true,
+        transcription: `coming soon...`
+      },
+      {
+        id: 103,
+        title: "Sriman Mahaprabhu & Prema Bhakti Day 3",
+        audioUrl: "/audio/Sriman_Mahaprabhu_&_Prema_Bhakti_Day_3.mp3",
+        duration: "45:30",
+        date: "2024-01-15",
+        hasTranscription: true,
+        transcription: `coming soon...`
+      },
+      {
+        id: 104,
+        title: "Sriman Mahaprabhu & Prema Bhakti Day 4",
+        audioUrl: "/audio/Sriman_Mahaprabhu_&_Prema_Bhakti_Day_4.mp3",
+        duration: "45:30",
+        date: "2024-01-15",
+        hasTranscription: true,
+        transcription: `Your transcription text...`
+      }
+    ]
   }
 ];
 

@@ -69,7 +69,7 @@ function VideoLibrary() {
                       {playlist.icon && playlist.icon.startsWith('/') ? (
                         <img src={playlist.icon} alt={playlist.playlistName} className="playlist-icon-img" />
                       ) : (
-                        <span className="playlist-icon-emoji">{playlist.icon || '📹'}</span>
+                        <span className="playlist-icon-emoji">{playlist.icon || '▶️'}</span>
                       )}
                     </div>
                     <div className="playlist-content">

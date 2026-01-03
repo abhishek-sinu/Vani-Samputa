@@ -39,7 +39,7 @@ function VideoPlaylist() {
       <Link to="/video" className="back-link">← Back to Video Library</Link>
       
       <div className="playlist-header">
-        <div className="playlist-icon">📹</div>
+        <div className="playlist-icon">▶️</div>
         <div>
           <h1>{playlist.playlistName}</h1>
           <p>{playlist.description}</p>

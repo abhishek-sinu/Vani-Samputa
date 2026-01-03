@@ -4,86 +4,88 @@ import { audioData } from '../data/libraryData';
 import './AudioLibrary.css';
 
 function AudioLibrary() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [filterTranscription, setFilterTranscription] = useState('all');
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
 
-  // Get unique categories
-  const categories = ['All', ...new Set(audioData.map(audio => audio.category))];
+  const languages = [
+    { name: 'Odia', icon: '🕉️', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/odia-card.jpg' },
+    { name: 'Hindi', icon: '🙏', color: '#4ecdc4', displayName: 'हिंदी', image: '/icons/hindi-card.jpg' },
+    { name: 'English', icon: '📖', color: '#45b7d1', displayName: 'English', image: '/icons/english-card.jpg' }
+  ];
 
-  // Filter audio data
-  const filteredAudio = audioData.filter(audio => {
-    const categoryMatch = selectedCategory === 'All' || audio.category === selectedCategory;
-    const transcriptionMatch = 
-      filterTranscription === 'all' || 
-      (filterTranscription === 'with' && audio.hasTranscription) ||
-      (filterTranscription === 'without' && !audio.hasTranscription);
-    
-    return categoryMatch && transcriptionMatch;
-  });
+  const filteredPlaylists = selectedLanguage
+    ? audioData.filter(playlist => playlist.language === selectedLanguage)
+    : [];
+
+  const getPlaylistCount = (language) => {
+    return audioData.filter(p => p.language === language).length;
+  };
 
   return (
     <div className="audio-library-container">
       <div className="library-header">
-        <h1>Audio Lectures Library</h1>
-        <p>Browse and listen to spiritual lectures with transcriptions</p>
+        <h1>Audio Lectures</h1>
+        <p>Listen to spiritual lectures organized by language with transcriptions</p>
       </div>
 
-      <div className="filters-container">
-        <div className="filter-group">
-          <label>Category:</label>
-          <select 
-            value={selectedCategory} 
-            onChange={(e) => setSelectedCategory(e.target.value)}
-            className="filter-select"
-          >
-            {categories.map(category => (
-              <option key={category} value={category}>{category}</option>
-            ))}
-          </select>
-        </div>
-
-        <div className="filter-group">
-          <label>Transcription:</label>
-          <select 
-            value={filterTranscription} 
-            onChange={(e) => setFilterTranscription(e.target.value)}
-            className="filter-select"
-          >
-            <option value="all">All Lectures</option>
-            <option value="with">With Transcription</option>
-            <option value="without">Without Transcription</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="audio-grid">
-        {filteredAudio.map(audio => (
-          <div key={audio.id} className="audio-card">
-            <div className="audio-icon">🎵</div>
-            <div className="audio-content">
-              <h3>{audio.title}</h3>
-              <div className="audio-meta">
-                <span className="category-tag">{audio.category}</span>
-                {audio.hasTranscription && (
-                  <span className="transcription-badge">📝 Transcription</span>
-                )}
+      {!selectedLanguage ? (
+        <div className="language-categories">
+          {languages.map(lang => (
+            <div
+              key={lang.name}
+              className="language-card"
+              onClick={() => setSelectedLanguage(lang.name)}
+              style={{ 
+                borderTop: `4px solid ${lang.color}`,
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${lang.image})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            >
+              <div className="playlist-count-badge">{getPlaylistCount(lang.name)}</div>
+              <div className="language-card-content">
+                <h2>{lang.displayName}</h2>
               </div>
-              <div className="audio-info">
-                <span>📅 {audio.date}</span>
-                <span>⏱️ {audio.duration}</span>
-              </div>
-              <Link to={`/audio/${audio.id}`} className="view-button">
-                View Details →
-              </Link>
             </div>
-          </div>
-        ))}
-      </div>
-
-      {filteredAudio.length === 0 && (
-        <div className="no-results">
-          <p>No audio lectures found matching your criteria.</p>
+          ))}
         </div>
+      ) : (
+        <>
+          <div className="selected-language-header">
+            <button onClick={() => setSelectedLanguage(null)} className="back-to-languages">
+              ← Back to Languages
+            </button>
+            <h2>{selectedLanguage} Audio Lectures</h2>
+          </div>
+
+          {filteredPlaylists.length > 0 ? (
+            <div className="playlists-grid">
+              {filteredPlaylists.map(playlist => (
+                <Link key={playlist.id} to={`/audio/${playlist.id}`} className="playlist-card-link">
+                  <div className="playlist-card">
+                    <div className="playlist-thumbnail">
+                      <div className="thumbnail-overlay">
+                        <span className="audio-count">{playlist.audios.length} Lectures</span>
+                      </div>
+                      {playlist.icon && playlist.icon.startsWith('/') ? (
+                        <img src={playlist.icon} alt={playlist.playlistName} className="playlist-icon-img" />
+                      ) : (
+                        <span className="playlist-icon-emoji">{playlist.icon || '🎵'}</span>
+                      )}
+                    </div>
+                    <div className="playlist-content">
+                      <h3>{playlist.playlistName}</h3>
+                      <p className="playlist-description">{playlist.description}</p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="no-playlists">
+              <p>No audio playlists available in {selectedLanguage} yet.</p>
+            </div>
+          )}
+        </>
       )}
     </div>
   );

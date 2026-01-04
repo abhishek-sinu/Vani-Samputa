@@ -6,6 +6,37 @@ import './AudioLibrary.css';
 function AudioLibrary() {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [categoryToAdd, setCategoryToAdd] = useState('');
+
+  const categories = [
+    'Bhagvad Gita',
+    'Bhakti-rasamrta-sindhu',
+    'Chaitanya-Charitamrita',
+    'Srimad Bhagavatam',
+    'Vaisnava Songs',
+    'Festival Lecture',
+    'Initiation Ceremony'
+  ];
+
+  const normalizeCategory = (value) =>
+    String(value || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, '');
+
+  const playlistMatchesCategory = (playlist, category) => {
+    if (!category) return true;
+
+    const wanted = normalizeCategory(category);
+    const raw = playlist?.category;
+    const list = Array.isArray(raw) ? raw : raw ? [raw] : [];
+    return list.some((c) => normalizeCategory(c) === wanted);
+  };
+
+  const playlistMatchesCategories = (playlist, categoriesToMatch) => {
+    if (!categoriesToMatch?.length) return true;
+    return categoriesToMatch.some((c) => playlistMatchesCategory(playlist, c));
+  };
 
   const languages = [
     { name: 'Odia', icon: '🕉️', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/odia-card.jpg' },
@@ -14,11 +45,21 @@ function AudioLibrary() {
   ];
 
   const filteredPlaylists = selectedLanguage
-    ? audioData.filter(playlist => 
+    ? audioData.filter((playlist) =>
         playlist.language === selectedLanguage &&
-        playlist.playlistName.toLowerCase().includes(searchTerm.toLowerCase())
+        playlist.playlistName.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        playlistMatchesCategories(playlist, selectedCategories)
       )
     : [];
+
+  const addCategory = (category) => {
+    if (!category) return;
+    setSelectedCategories((prev) => (prev.includes(category) ? prev : [...prev, category]));
+  };
+
+  const removeCategory = (category) => {
+    setSelectedCategories((prev) => prev.filter((c) => c !== category));
+  };
 
   const getPlaylistCount = (language) => {
     return audioData.filter(p => p.language === language).length;
@@ -43,7 +84,12 @@ function AudioLibrary() {
             <div
               key={lang.name}
               className="language-card"
-              onClick={() => setSelectedLanguage(lang.name)}
+              onClick={() => {
+                setSelectedLanguage(lang.name);
+                setSearchTerm('');
+                setSelectedCategories([]);
+                setCategoryToAdd('');
+              }}
               style={{ 
                 borderTop: `4px solid ${lang.color}`,
                 backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${lang.image})`,
@@ -78,6 +124,44 @@ function AudioLibrary() {
                 >
                   ✕
                 </button>
+              )}
+            </div>
+
+            <div className="category-filter">
+              <select
+                className="category-select"
+                value={categoryToAdd}
+                onChange={(e) => {
+                  const next = e.target.value;
+                  addCategory(next);
+                  setCategoryToAdd('');
+                }}
+                aria-label="Add category filter"
+              >
+                <option value="">Add Category</option>
+                {categories.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+
+              {selectedCategories.length > 0 && (
+                <div className="category-chips" aria-label="Selected categories">
+                  {selectedCategories.map((c) => (
+                    <span key={c} className="category-chip">
+                      {c}
+                      <button
+                        type="button"
+                        className="chip-remove"
+                        onClick={() => removeCategory(c)}
+                        aria-label={`Remove ${c}`}
+                      >
+                        ✕
+                      </button>
+                    </span>
+                  ))}
+                </div>
               )}
             </div>
           </div>

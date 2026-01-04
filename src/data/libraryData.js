@@ -2,7 +2,7 @@ export const audioData = [
   {
     id: 1,
     playlistName: "Sriman Mahaprabhu & Prema Bhakti",
-    category: "Chaitanya Charitamrita",
+    category: ["Chaitanya Charitamrita"],
     description: "lecture series on Sriman Mahaprabhu & Prema Bhakti",
     language: "Hindi",
     location: "ISKCON Vrindavan",
@@ -52,6 +52,7 @@ export const videoData = [
   {
     id: 1,
     playlistName: "Stages of Bhakti (Shraddha-Prema)",
+    category: ["Bhakti-rasamrta-sindhu","Chaitanya-Charitamrita"],
     description: "A comprehensive series exploring the progressive stages of devotional service from initial faith to pure love",
     language: "Hindi",
     location: "ISKCON Dwarka",
@@ -119,7 +120,7 @@ export const videoData = [
   {
     id: 2,
     playlistName: "Teachings of Lord Chaitanya",
-    category: "Chaitanya Charitamrita",
+    category: ["Chaitanya Charitamrita"],
     description: "",
     language: "Hindi",
     location: "Iskcon Bhopal BYC",
@@ -160,7 +161,7 @@ export const videoData = [
     id: 3,
     playlistName: "Brahma Vimohan Lila",
     description: "",
-    category: "Srimad Bhagavatam",
+    category: ["Srimad Bhagavatam"],
     language: "Odia",
     location: "ISKCON Bhubaneswar",
     icon: "▶️",
@@ -221,7 +222,7 @@ export const videoData = [
     id: 4,
     playlistName: "Aghasura Lila",
     description: "",
-    category: "Srimad Bhagavatam",
+    category: ["Srimad Bhagavatam"],
     language: "Odia",
     location: "ISKCON Bhubaneswar",
     icon: "▶️",
@@ -295,7 +296,7 @@ export const videoData = [
   {
     id: 5,
     playlistName: "Sanatana Goswami",
-    category: "Chaitanya Charitamrita",
+    category: ["Chaitanya Charitamrita"],
     language: "Hindi",
     location: "ISKCON Ravet Sri Govind Dham",
     icon: "▶️",
@@ -327,7 +328,7 @@ export const videoData = [
   {
     id: 6,
     playlistName: "Avadhut Yadu Samvaad",
-    category: "Srimad Bhagavatam",
+    category: ["Srimad Bhagavatam"],
     description: "",
     language: "Odia",
     location: "ISKCON Bhubaneswar",

@@ -10,7 +10,7 @@ function Admin() {
   const [audioPlaylist, setAudioPlaylist] = useState({
     id: audioData.length + 1,
     playlistName: '',
-    category: '',
+    category: [],
     description: '',
     language: 'Hindi',
     location: '',
@@ -22,6 +22,7 @@ function Admin() {
   const [videoPlaylist, setVideoPlaylist] = useState({
     id: videoData.length + 1,
     playlistName: '',
+    category: [],
     description: '',
     language: 'Hindi',
     location: '',
@@ -153,7 +154,7 @@ function Admin() {
       setAudioPlaylist({
         id: audioData.length + 1,
         playlistName: '',
-        category: '',
+        category: [],
         description: '',
         language: 'Hindi',
         location: '',
@@ -164,6 +165,7 @@ function Admin() {
       setVideoPlaylist({
         id: videoData.length + 1,
         playlistName: '',
+        category: [],
         description: '',
         language: 'Hindi',
         location: '',
@@ -215,9 +217,17 @@ function Admin() {
                 <label>Category</label>
                 <input
                   type="text"
-                  value={audioPlaylist.category}
-                  onChange={(e) => setAudioPlaylist({ ...audioPlaylist, category: e.target.value })}
-                  placeholder="e.g., Chaitanya Charitamrita"
+                  value={audioPlaylist.category.join(', ')}
+                  onChange={(e) =>
+                    setAudioPlaylist({
+                      ...audioPlaylist,
+                      category: e.target.value
+                        .split(',')
+                        .map((value) => value.trim())
+                        .filter(Boolean),
+                    })
+                  }
+                  placeholder="e.g., Chaitanya Charitamrita, Srimad Bhagavatam"
                 />
               </div>
               <div className="form-group full-width">
@@ -360,6 +370,23 @@ function Admin() {
                   value={videoPlaylist.playlistName}
                   onChange={(e) => setVideoPlaylist({ ...videoPlaylist, playlistName: e.target.value })}
                   placeholder="e.g., Stages of Bhakti"
+                />
+              </div>
+              <div className="form-group">
+                <label>Category</label>
+                <input
+                  type="text"
+                  value={videoPlaylist.category.join(', ')}
+                  onChange={(e) =>
+                    setVideoPlaylist({
+                      ...videoPlaylist,
+                      category: e.target.value
+                        .split(',')
+                        .map((value) => value.trim())
+                        .filter(Boolean),
+                    })
+                  }
+                  placeholder="e.g., Bhakti-rasamrta-sindhu, Chaitanya Charitamrita"
                 />
               </div>
               <div className="form-group">

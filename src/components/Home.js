@@ -234,6 +234,7 @@ function Home() {
             <div className="stat-number">{withPlus(transcriptionCount)}</div>
             <div className="stat-label">Transcriptions</div>
           </div>
+          {/*
           <div className="stat-item">
             <div className="stat-number">{withPlus(visitorStats.count)}</div>
             <div className="stat-label">Visitors</div>
@@ -241,6 +242,7 @@ function Home() {
               <div className="stat-subtext">Latest: {formatLastVisit(visitorStats.lastVisit)}</div>
             )}
           </div>
+          */}
         </div>
       </div>
     </div>

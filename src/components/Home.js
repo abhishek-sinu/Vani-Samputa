@@ -1,27 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { audioData, videoData, cryingSchoolVideoData } from '../data/libraryData';
 import './Home.css';
 
 const DAILY_QUOTES = [
   {
     language: 'English',
     title: 'Daily Quote',
-    text: 'Chant the holy name and be happy.',
+    text: 'With loving devotion, one can serve the Guru and Krishna (seva). When this deep love and affection is present, bhajan is performed; otherwise, whatever else one does is simply activity (karma).',
   },
   {
     language: 'हिंदी',
     title: 'आज का उद्धरण',
-    text: 'हरे नाम का जप करें और प्रसन्न रहें।',
+    text: 'ममता से गुरु- कृष्ण की सेवा होती हैं; ममता से भजन होता है, नहीं तो वह कर्म हो जाता है।',
   },
   {
     language: 'ଓଡ଼ିଆ',
     title: 'ଆଜିର ଉଦ୍ଧୃତି',
-    text: 'ହରିନାମ ଜପ କରନ୍ତୁ ଏବଂ ସୁଖୀ ରୁହନ୍ତୁ।',
+    text: 'ମମତାରେ ଗୁରୁ, କୃଷ୍ଣଙ୍କର ସେବା ହୁଏ, ମମତା ଭାବ ଥିଲେ ଭଜନ ହୁଏ ଅନ୍ୟଥା ଯାହା କିଛି କରିବା ସେସବୁ କର୍ମ।',
   },
   {
     language: 'বাংলা',
     title: 'আজকের উক্তি',
-    text: 'হরিনাম জপ করুন এবং সুখী থাকুন।',
+    text: 'ভক্তি ও প্রেম দিয়ে গুরু ও কৃষ্ণের সেবা করা যায়। যখন এই গভীর প্রেম ও স্নেহ থাকে, তখন ভজন হয়; অন্যথায় যা কিছু করা হয় তা শুধু কর্ম।',
   },
 ];
 
@@ -30,6 +31,32 @@ const daySeed = () => Math.floor(Date.now() / 86400000);
 function Home() {
   const [quoteIndex, setQuoteIndex] = React.useState(() => daySeed() % DAILY_QUOTES.length);
   const [visitorStats, setVisitorStats] = React.useState({ count: 0, lastVisit: null });
+
+  const { audioLectureCount, videoLectureCount, transcriptionCount } = React.useMemo(() => {
+    const safeArray = (value) => (Array.isArray(value) ? value : []);
+
+    const audioPlaylists = safeArray(audioData);
+    const videoPlaylists = safeArray(videoData);
+    const cryingSchoolPlaylists = safeArray(cryingSchoolVideoData);
+
+    const allAudios = audioPlaylists.flatMap((p) => safeArray(p?.audios));
+    const allVideos = [...videoPlaylists, ...cryingSchoolPlaylists].flatMap((p) => safeArray(p?.videos));
+
+    const isRealTranscription = (audio) => {
+      if (!audio?.hasTranscription) return false;
+      const text = String(audio?.transcription || '').trim();
+      if (!text) return false;
+      if (/^coming\s+soon\.?\.?\.?$/i.test(text)) return false;
+      if (/^your\s+transcription\s+text\.?\.?\.?$/i.test(text)) return false;
+      return true;
+    };
+
+    return {
+      audioLectureCount: allAudios.length,
+      videoLectureCount: allVideos.length,
+      transcriptionCount: allAudios.filter(isRealTranscription).length
+    };
+  }, []);
 
   React.useEffect(() => {
     const intervalId = setInterval(() => {
@@ -84,6 +111,12 @@ function Home() {
     return d.toLocaleString();
   };
 
+  const withPlus = (value) => {
+    const n = Number(value || 0);
+    if (!Number.isFinite(n) || n <= 0) return '0';
+    return `${n}+`;
+  };
+
   return (
     <div className="home-container">
       <div className="hero-section">
@@ -97,37 +130,50 @@ function Home() {
               Access spiritual lectures with transcriptions and organized video playlists
             </p>
             <p className="hero-author">
-              Lectures given by HH Haladhara Svāmī Mahārāja
+              Lectures given by <span className="guru-name">Śrī Śrīmad Goura Govinda Svāmī Mahārāja</span> and{' '}
+              <span className="guru-name">HH Haladhara Svāmī Mahārāja</span>
             </p>
           </div>
-          <div className="radha-madhava-image">
-            <img src="/RadhaMadhav.png" alt="Radha Madhava" />
+          <div className="guru-photo guru-photo-right">
+            <img src="/icons/ssggs1.jpg" alt="Śrī Śrīmad Goura Govinda Svāmī Mahārāja" />
           </div>
         </div>
       </div>
 
       <div className="daily-quote-section" aria-label="Daily quote">
         <div className="daily-quote-card">
-          <div className="daily-quote-label">Daily Quote</div>
+          <div className="daily-quote-inner">
+            <div className="daily-quote-image">
+              <img src="/RadhaMadhav.png" alt="Radha Madhava" />
+            </div>
 
-          <div className="daily-quote-viewport">
-            <div
-              className="daily-quote-track"
-              style={{ transform: `translateX(-${quoteIndex * 100}%)` }}
-            >
-              {DAILY_QUOTES.map((quote) => (
+            <div className="daily-quote-content">
+              <div className="daily-quote-label">Daily Quote</div>
+
+              <div className="daily-quote-viewport">
                 <div
-                  key={`${quote.language}-${quote.title}`}
-                  className="daily-quote-slide"
-                  aria-label={`${quote.title} (${quote.language})`}
+                  className="daily-quote-track"
+                  style={{ transform: `translateX(-${quoteIndex * 100}%)` }}
                 >
-                  <div className="daily-quote-meta">
-                    <span className="daily-quote-title">{quote.title}</span>
-                    <span className="daily-quote-language">{quote.language}</span>
-                  </div>
-                  <div className="daily-quote-text">“{quote.text}”</div>
+                  {DAILY_QUOTES.map((quote) => (
+                    <div
+                      key={`${quote.language}-${quote.title}`}
+                      className="daily-quote-slide"
+                      aria-label={`${quote.title} (${quote.language})`}
+                    >
+                      <div className="daily-quote-meta">
+                        <span className="daily-quote-title">{quote.title}</span>
+                        <span className="daily-quote-language">{quote.language}</span>
+                      </div>
+                      <div className="daily-quote-text">“{quote.text}”</div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+            </div>
+
+            <div className="daily-quote-image daily-quote-image-right">
+              <img src="/icons/Gopal.jpg" alt="Jagannath" />
             </div>
           </div>
         </div>
@@ -174,23 +220,25 @@ function Home() {
         <p>
           This platform provides access to spiritual knowledge through audio and video formats. 
           Our collection includes lectures on Bhagavad Gita, Srimad Bhagavatam, conversations, 
-          and special festival lectures.
+          and special festival lectures given by{' '}
+          <span className="guru-name">Śrī Śrīmad Goura Govinda Svāmī Mahārāja</span> and{' '}
+          <span className="guru-name">HH Haladhara Svāmī Mahārāja</span>.
         </p>
         <div className="stats-container">
           <div className="stat-item">
-            <div className="stat-number">50+</div>
+            <div className="stat-number">{withPlus(audioLectureCount)}</div>
             <div className="stat-label">Audio Lectures</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">30+</div>
-            <div className="stat-label">Video Playlists</div>
+            <div className="stat-number">{withPlus(videoLectureCount)}</div>
+            <div className="stat-label">Video Lectures</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">100+</div>
+            <div className="stat-number">{withPlus(transcriptionCount)}</div>
             <div className="stat-label">Transcriptions</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">{visitorStats.count ?? '—'}</div>
+            <div className="stat-number">{withPlus(visitorStats.count)}</div>
             <div className="stat-label">Visitors</div>
             {visitorStats.lastVisit && (
               <div className="stat-subtext">Latest: {formatLastVisit(visitorStats.lastVisit)}</div>

@@ -164,6 +164,7 @@
   .header-subtitle {
     font-size: 0.95rem;
   }
+    line-height: 1.2;
 
   .header-subtitle::after {
     width: 140px;

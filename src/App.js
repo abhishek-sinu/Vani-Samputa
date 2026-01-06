@@ -11,6 +11,7 @@ import Admin from './components/Admin';
 import Live from './components/Live';
 import CryingSchoolLibrary from './components/CryingSchoolLibrary';
 import CryingSchoolPlaylist from './components/CryingSchoolPlaylist';
+import About from './components/About';
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -36,7 +37,10 @@ function App() {
               </div>
               <div className="brand-text">
                 <h1>Vāṇī Saṃpuṭa</h1>
-                <div className="header-subtitle">HH Haladhara Svāmī Mahārāja</div>
+                <div className="header-subtitle">
+                  <div>Śrī Śrīmad Goura Govinda Svāmī Mahārāja</div>
+                  <div>HH Haladhara Svāmī Mahārāja</div>
+                </div>
               </div>
             </Link>
             <button className="mobile-menu-toggle" onClick={toggleMobileMenu} aria-label="Toggle menu">
@@ -48,6 +52,7 @@ function App() {
             </button>
             <nav className={mobileMenuOpen ? "main-nav mobile-open" : "main-nav"}>
               <Link to="/" onClick={closeMobileMenu}>Home</Link>
+              <Link to="/about" onClick={closeMobileMenu}>About</Link>
               <Link to="/audio" onClick={closeMobileMenu}>Audio Lectures</Link>
               <Link to="/video" onClick={closeMobileMenu}>Video Playlists</Link>
               <Link to="/crying-school" onClick={closeMobileMenu}>Crying School Videos</Link>
@@ -59,6 +64,7 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
             <Route path="/audio" element={<AudioLibrary />} />
             <Route path="/audio/:id" element={<AudioDetail />} />
             <Route path="/video" element={<VideoLibrary />} />

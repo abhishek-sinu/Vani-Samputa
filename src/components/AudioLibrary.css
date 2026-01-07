@@ -18,9 +18,9 @@
   margin-bottom: 1.25rem;
   background: linear-gradient(135deg, #f5f0e8 0%, #ffffff 50%, #f5f0e8 100%);
   padding: 1.75rem 2rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(139, 111, 71, 0.15);
-  border-bottom: 4px solid #d4a574;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-soft);
+  border-bottom: 4px solid var(--accent);
   position: relative;
   overflow: hidden;
 }
@@ -30,8 +30,8 @@
   left: 2rem;
   top: 1.25rem;
   background: white;
-  color: #8b6f47;
-  border: 2px solid #8b6f47;
+  color: var(--accent-dark);
+  border: 2px solid var(--accent-dark);
   padding: 0.5rem 1rem;
   border-radius: 8px;
   font-size: 0.95rem;
@@ -45,7 +45,7 @@
 }
 
 .library-header .back-to-languages:hover {
-  background: #8b6f47;
+  background: var(--accent-dark);
   color: white;
 }
 
@@ -63,7 +63,7 @@
 
 .library-header h1 {
   font-size: 2.5rem;
-  background: linear-gradient(135deg, #d4a574 0%, #8b6f47 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -90,8 +90,8 @@
 .language-card {
   background: white;
   padding: 3rem 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;

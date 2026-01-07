@@ -283,7 +283,7 @@
   background: #e8e8e8;
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
-  font-family: 'Courier New', monospace;
+  font-family: inherit;
   color: #d4a574;
 }
 

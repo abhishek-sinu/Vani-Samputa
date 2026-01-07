@@ -16,7 +16,7 @@
 .back-link {
   display: inline-block;
   margin-bottom: 1.5rem;
-  color: #8b6f47;
+  color: var(--accent-dark);
   text-decoration: none;
   font-size: 1rem;
   font-weight: 600;
@@ -30,8 +30,8 @@
 .playlist-header {
   background: white;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
   margin-bottom: 2rem;
   display: flex;
   gap: 1.5rem;
@@ -77,9 +77,9 @@
 /* Main Audio Section */
 .main-audio-section {
   background: white;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .audio-player-wrapper {
@@ -121,7 +121,7 @@
   background: #e8f4f8;
   color: #1976d2;
   padding: 0.25rem 0.75rem;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   font-size: 0.85rem;
   font-weight: 600;
 }
@@ -157,12 +157,12 @@
 
 .transcription-content::-webkit-scrollbar-track {
   background: #f1f1f1;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 }
 
 .transcription-content::-webkit-scrollbar-thumb {
   background: #b8885a;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 }
 
 .no-transcription {
@@ -175,8 +175,8 @@
 /* Playlist Sidebar */
 .playlist-sidebar {
   background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
   max-height: 700px;
   display: flex;
   flex-direction: column;
@@ -192,7 +192,7 @@
   align-items: center;
   background: linear-gradient(135deg, #b8885a 0%, #4a2f1a 100%);
   color: white;
-  border-radius: 10px 10px 0 0;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .playlist-sidebar-header h3 {
@@ -220,7 +220,7 @@
 
 .playlist-items::-webkit-scrollbar-thumb {
   background: #b8885a;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 }
 
 .playlist-item {
@@ -239,7 +239,7 @@
 
 .playlist-item.active {
   background-color: #e8d4bc;
-  border-left: 4px solid #8b6f47;
+  border-left: 4px solid var(--accent-dark);
 }
 
 .playlist-item-icon {
@@ -279,9 +279,9 @@
 .error-message {
   background: white;
   padding: 3rem;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .error-message h2 {
@@ -393,7 +393,7 @@
 
 .back-link {
   display: inline-block;
-  color: #8b6f47;
+  color: var(--accent-dark);
   text-decoration: none;
   font-weight: 600;
   margin-bottom: 1.5rem;
@@ -406,9 +406,9 @@
 
 .audio-detail-card {
   background: white;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .audio-header {
@@ -523,7 +523,7 @@
   text-align: center;
   padding: 3rem;
   background: white;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 }
 
 .error-message h2 {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, HashRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
 import './App.css';
 import Home from './components/Home';
@@ -12,9 +12,12 @@ import Live from './components/Live';
 import CryingSchoolLibrary from './components/CryingSchoolLibrary';
 import CryingSchoolPlaylist from './components/CryingSchoolPlaylist';
 import About from './components/About';
+import liveConfig from './config/liveConfig.json';
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+  const hasLiveUrl = Boolean((liveConfig?.url || '').trim());
 
   const Router = Capacitor.isNativePlatform() ? HashRouter : BrowserRouter;
 
@@ -25,6 +28,17 @@ function App() {
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
   };
+
+  React.useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setMobileMenuOpen(false);
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [mobileMenuOpen]);
 
   return (
     <Router>
@@ -50,13 +64,53 @@ function App() {
               </span>
             </button>
             <nav className={mobileMenuOpen ? "main-nav mobile-open" : "main-nav"}>
-              <Link to="/" onClick={closeMobileMenu}>Home</Link>
-              <Link to="/about" onClick={closeMobileMenu}>About</Link>
-              <Link to="/audio" onClick={closeMobileMenu}>Audio Lectures</Link>
-              <Link to="/video" onClick={closeMobileMenu}>Video Playlists</Link>
+              <NavLink
+                to="/"
+                end
+                onClick={closeMobileMenu}
+                className={({ isActive }) => (isActive ? 'active' : undefined)}
+              >
+                Home
+              </NavLink>
+              <NavLink
+                to="/about"
+                onClick={closeMobileMenu}
+                className={({ isActive }) => (isActive ? 'active' : undefined)}
+              >
+                About
+              </NavLink>
+              <NavLink
+                to="/audio"
+                onClick={closeMobileMenu}
+                className={({ isActive }) => (isActive ? 'active' : undefined)}
+              >
+                Audio Lectures
+              </NavLink>
+              <NavLink
+                to="/video"
+                onClick={closeMobileMenu}
+                className={({ isActive }) => (isActive ? 'active' : undefined)}
+              >
+                Video Playlists
+              </NavLink>
               {/* <Link to="/crying-school" onClick={closeMobileMenu}>Crying School Videos</Link> */}
-              <Link to="/live" onClick={closeMobileMenu}>Live</Link>
+              <NavLink
+                to="/live"
+                onClick={closeMobileMenu}
+                className={({ isActive }) => (isActive ? 'active' : undefined)}
+              >
+                <span className="nav-label">
+                  Live
+                  {hasLiveUrl && <span className="live-indicator-dot" aria-hidden="true" />}
+                </span>
+              </NavLink>
             </nav>
+
+            <div
+              className={mobileMenuOpen ? 'nav-overlay open' : 'nav-overlay'}
+              onClick={closeMobileMenu}
+              aria-hidden="true"
+            />
           </div>
         </header>
         

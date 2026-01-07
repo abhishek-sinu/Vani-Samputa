@@ -5,8 +5,8 @@
 .playlist-header {
   background: white;
   padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
   margin-bottom: 2rem;
   display: flex;
   gap: 1.5rem;
@@ -52,9 +52,9 @@
 /* Main Video Section */
 .main-video-section {
   background: white;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
 }
 
 .video-player-wrapper {
@@ -92,8 +92,8 @@
 /* Playlist Sidebar */
 .playlist-sidebar {
   background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
   max-height: 700px;
   display: flex;
   flex-direction: column;
@@ -109,7 +109,7 @@
   align-items: center;
   background: linear-gradient(135deg, #d4a574 0%, #6b4423 100%);
   color: white;
-  border-radius: 10px 10px 0 0;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .playlist-sidebar-header h3 {
@@ -142,7 +142,7 @@
 
 .playlist-item.active {
   background: linear-gradient(90deg, rgba(212, 165, 116, 0.15) 0%, rgba(107, 68, 35, 0.15) 100%);
-  border-left: 4px solid #8b6f47;
+  border-left: 4px solid var(--accent-dark);
 }
 
 .playlist-item-thumbnail {
@@ -155,7 +155,7 @@
 }
 
 .playlist-item.active .playlist-item-thumbnail {
-  border: 2px solid #8b6f47;
+  border: 2px solid var(--accent-dark);
 }
 
 .playlist-item-content {
@@ -178,7 +178,7 @@
   text-align: center;
   padding: 3rem;
   background: white;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 }
 
 .error-message h2 {
@@ -188,7 +188,7 @@
 
 .back-link {
   display: inline-block;
-  color: #8b6f47;
+  color: var(--accent-dark);
   text-decoration: none;
   font-weight: 600;
   margin-bottom: 1.5rem;

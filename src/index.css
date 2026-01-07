@@ -25,6 +25,25 @@ body {
   color: #222;
 }
 
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+@supports (overflow: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
 button,
 input,
 select,

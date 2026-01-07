@@ -154,6 +154,12 @@
   min-width: 300px;
 }
 
+@media (max-width: 360px) {
+  .hero-text {
+    min-width: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-content {
     flex-direction: column;

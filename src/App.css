@@ -214,8 +214,8 @@
 
 @media (max-width: 768px) {
   .logo-circle {
-    width: 58px;
-    height: 58px;
+    width: 72px;
+    height: 72px;
     padding: 0;
   }
 
@@ -248,7 +248,7 @@
   .main-nav {
     position: fixed;
     top: 0;
-    right: -100%;
+    right: 0;
     width: 250px;
     height: 100vh;
     background: linear-gradient(180deg, #4a2f1a 0%, #b8885a 100%);
@@ -256,12 +256,13 @@
     gap: 0;
     padding: 5rem 0 2rem 0;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
-    transition: right 0.3s ease;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
     z-index: 2100;
   }
 
   .main-nav.mobile-open {
-    right: 0;
+    transform: translateX(0);
   }
 
   .nav-overlay {

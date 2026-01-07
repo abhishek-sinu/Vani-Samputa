@@ -103,7 +103,7 @@ function VideoLibrary() {
 
   return (
     <div className="video-library-container">
-      <div className="library-header">
+      <div className={`library-header${selectedLanguage ? ' has-back' : ''}`}>
         {selectedLanguage && (
           <button onClick={() => setSelectedLanguage(null)} className="back-to-languages">
             <span className="back-arrow">←</span>

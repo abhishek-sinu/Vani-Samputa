@@ -68,12 +68,43 @@
   min-width: 0;
 }
 
-.daily-quote-label {
+.daily-quote-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   padding: 0.75rem 1rem;
-  font-weight: 700;
-  color: #4a2f1a;
   background: linear-gradient(135deg, rgba(212, 165, 116, 0.22) 0%, rgba(107, 68, 35, 0.16) 100%);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.daily-quote-label {
+  font-weight: 700;
+  color: #4a2f1a;
+}
+
+.quote-language-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+.quote-language-tab {
+  appearance: none;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  background: rgba(255, 255, 255, 0.75);
+  color: #4a2f1a;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.quote-language-tab.active {
+  background: rgba(212, 165, 116, 0.22);
+  border-color: rgba(107, 68, 35, 0.35);
 }
 
 .daily-quote-viewport {
@@ -81,14 +112,7 @@
   overflow: hidden;
 }
 
-.daily-quote-track {
-  display: flex;
-  width: 100%;
-  transition: transform 650ms ease;
-}
-
 .daily-quote-slide {
-  min-width: 100%;
   padding: 1.25rem 1.25rem 1.35rem;
 }
 
@@ -125,6 +149,105 @@
   max-width: 1200px;
   margin: 0 auto;
   flex-wrap: wrap;
+}
+
+.home-global-search {
+  width: min(680px, 100%);
+  margin-top: 1.25rem;
+  text-align: left;
+  position: relative;
+}
+
+.home-global-search-label {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  opacity: 0.95;
+}
+
+.home-global-search-inputRow {
+  display: flex;
+  align-items: center;
+}
+
+.home-global-search-input {
+  width: 100%;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  padding: 0.85rem 1.1rem;
+  font-size: 1.05rem;
+  outline: none;
+}
+
+.home-global-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.home-global-search-input:focus {
+  border-color: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.home-global-search-dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 0.6rem);
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  max-height: 360px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 20;
+}
+
+.home-global-search-item {
+  display: block;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: #2a2a2a;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.home-global-search-item:last-child {
+  border-bottom: none;
+}
+
+.home-global-search-item:hover {
+  background: rgba(212, 165, 116, 0.16);
+}
+
+.home-global-search-itemTitle {
+  font-weight: 800;
+}
+
+.home-global-search-itemMeta {
+  margin-top: 0.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: #6b4423;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.home-global-search-itemKind {
+  opacity: 0.95;
+}
+
+.home-global-search-itemSub {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+}
+
+.home-global-search-empty {
+  padding: 0.9rem 1rem;
+  color: rgba(0, 0, 0, 0.65);
+  font-weight: 700;
 }
 
 .guru-photo {
@@ -254,10 +377,18 @@
 }
 
 .feature-icon {
-  font-size: 3rem;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1rem;
-  filter: grayscale(100%) sepia(100%) saturate(400%) hue-rotate(10deg) brightness(0.8);
+  color: #6b4423;
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.22) 0%, rgba(107, 68, 35, 0.16) 100%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
+
 
 .feature-card h2 {
   font-size: 1.5rem;
@@ -354,6 +485,35 @@
   
   .hero-subtitle {
     font-size: 1rem;
+  }
+
+  .home-global-search {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .home-global-search-label {
+    text-align: center;
+  }
+
+  .home-global-search-input {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+
+  .home-global-search-dropdown {
+    max-height: 55vh;
+    text-align: left;
+  }
+
+  .daily-quote-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quote-language-tabs {
+    justify-content: center;
   }
   
   .features-grid {

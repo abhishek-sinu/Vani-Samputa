@@ -19,18 +19,14 @@ function AboutCard({ heading, photoSrc, alt, children }) {
 export default function About() {
   return (
     <div className="about-page">
-      <div className="about-hero">
-        <h1>About</h1>
-      </div>
-
       <div className="about-grid">
         <AboutCard
-          heading="His Holiness Haladhara Swami"
+          heading="Haladhara Svāmī Mahārāja"
           photoSrc="/icons/hindi-card.jpg"
-          alt="His Holiness Haladhara Swami"
+          alt="Haladhara Svāmī Mahārāja"
         >
           <p>
-            His Holiness Haladhara Swami was born and brought up in Odisha, India. He came into contact
+            His Haladhara Svāmī Mahārāja was born and brought up in Odisha, India. He came into contact
             with the devotees at ISKCON Bhubaneswar temple in 1992 and was initiated in 1994,
             receiving the name Halayudha Dasa by Sri Srimad Goura Govinda Swami Maharaj.
           </p>

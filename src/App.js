@@ -91,7 +91,7 @@ function App() {
                 onClick={closeMobileMenu}
                 className={({ isActive }) => (isActive ? 'active' : undefined)}
               >
-                Video Playlists
+                Video Lectures
               </NavLink>
               {/* <Link to="/crying-school" onClick={closeMobileMenu}>Crying School Videos</Link> */}
               <NavLink

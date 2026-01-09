@@ -43,7 +43,6 @@ function Live() {
   return (
     <div className="live-container">
       <div className="library-header">
-        <h1>{title}</h1>
         <p>Watch the current live / latest lecture stream</p>
       </div>
 

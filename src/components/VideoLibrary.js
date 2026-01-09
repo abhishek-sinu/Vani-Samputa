@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SlidersHorizontal } from 'phosphor-react';
 import { videoData } from '../data/libraryData';
 import './VideoLibrary.css';
 
@@ -7,23 +8,18 @@ function VideoLibrary() {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [categoryToAdd, setCategoryToAdd] = useState('');
+  const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
+  const categoryDropdownRef = React.useRef(null);
 
   const categories = [
     'Bhagvad Gita',
-    'Bhakti-rasamrta-sindhu',
-    'Tattva',
-    'Guru Seva',
-    'Anugatya',
-    'Vaisnava Seva',
-    'Krishna Conciousness',
     'Chaitanya-Charitamrita',
+    'Chaitanya Bhagavat',
     'Srimad Bhagavatam',
     'Vaisnava Songs',
     'Festival Lecture',
-    'Initiation',
     'Initiation Ceremony',
-    'Other'
+    'Seminar'
   ];
 
   const normalizeCategory = (value) =>
@@ -101,6 +97,32 @@ function VideoLibrary() {
     return videoData.filter(p => p.language === language).length;
   };
 
+  const availableCategories = React.useMemo(() => {
+    return categories.filter((c) => !selectedCategories.includes(c));
+  }, [categories, selectedCategories]);
+
+  React.useEffect(() => {
+    if (!categoryDropdownOpen) return;
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setCategoryDropdownOpen(false);
+    };
+
+    const onPointerDown = (event) => {
+      const wrapper = categoryDropdownRef.current;
+      if (!wrapper) return;
+      if (wrapper.contains(event.target)) return;
+      setCategoryDropdownOpen(false);
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('pointerdown', onPointerDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('pointerdown', onPointerDown);
+    };
+  }, [categoryDropdownOpen]);
+
   return (
     <div className="video-library-container">
       <div className={`library-header${selectedLanguage ? ' has-back' : ''}`}>
@@ -124,7 +146,7 @@ function VideoLibrary() {
                 setSelectedLanguage(lang.name);
                 setSearchTerm('');
                 setSelectedCategories([]);
-                setCategoryToAdd('');
+                setCategoryDropdownOpen(false);
               }}
               style={{ 
                 borderTop: `4px solid ${lang.color}`,
@@ -164,23 +186,44 @@ function VideoLibrary() {
             </div>
 
             <div className="category-filter">
-              <select
-                className="category-select"
-                value={categoryToAdd}
-                onChange={(e) => {
-                  const next = e.target.value;
-                  addCategory(next);
-                  setCategoryToAdd('');
-                }}
-                aria-label="Add category filter"
-              >
-                <option value="">Add Category</option>
-                {categories.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
-                ))}
-              </select>
+              <div className="category-select-wrapper" ref={categoryDropdownRef}>
+                <button
+                  type="button"
+                  className="category-select"
+                  onClick={() => setCategoryDropdownOpen((prev) => !prev)}
+                  aria-label="Add category filter"
+                  aria-haspopup="listbox"
+                  aria-expanded={categoryDropdownOpen}
+                >
+                  <span className="category-select-text">Add Category</span>
+                  <span className="category-select-icon" aria-hidden="true">
+                    <SlidersHorizontal size={18} weight="bold" />
+                  </span>
+                </button>
+
+                {categoryDropdownOpen && (
+                  <div className="category-dropdown" role="listbox" aria-label="Categories">
+                    {availableCategories.length ? (
+                      availableCategories.map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          role="option"
+                          className="category-dropdown-item"
+                          onClick={() => {
+                            addCategory(c);
+                            setCategoryDropdownOpen(false);
+                          }}
+                        >
+                          {c}
+                        </button>
+                      ))
+                    ) : (
+                      <div className="category-dropdown-empty">No more categories</div>
+                    )}
+                  </div>
+                )}
+              </div>
 
               {selectedCategories.length > 0 && (
                 <div className="category-chips" aria-label="Selected categories">
